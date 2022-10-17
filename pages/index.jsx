@@ -2,13 +2,102 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from './Home/home.module.scss'
 import Link from 'next/link'
-
+import { useState } from 'react'
 import Footer from '../components/Footer'
+import Nav from '../components/Nav'
+
+const CATEGORY_LIST = ['DAO',
+  'Media',
+  'Investment',
+  'Service',
+  'Grant',
+  'Social',
+  'DAO tool',
+  'Defi',
+  'CeFi',
+  'TradeFi',
+  'BlockFi',
+  'Lending',
+  'Yield aggregator',
+  'Stablecoin',
+  'NFT',
+  'Metaverse',
+  'Art',
+  'Music',
+  'NFT marketplace',
+  'Utilities',
+  'Analytics',
+  'Payment',
+  'Oracle',
+  'Games',
+  'Infrastructure',
+  'Wallet',
+  'Indexer',
+  'Storage',
+  'Identity',
+  'Exchange',
+  'Community',
+  'Guild',
+  'Marketing tool',
+  'Public Good',
+  'Education'];
+
+const ScrollCon = () => {
+  const [selectedTab, setselectedTab] = useState('all');
+
+  const scrolltoEnd = () => {
+    // document.querySelector('#cat_container').scrollLeft = 99999;
+    let rightArrow = document.querySelector('.' + styles.scrollEnd);
+    let rightMarker = rightArrow.getBoundingClientRect().x;
+    let list = document.querySelector('#cat_container').childNodes;
+    let startingPoint;
+    list = [...list].forEach((ele, idx) => {
+      let x = ele.getBoundingClientRect().x;
+      let delta = rightMarker - x;
+      console.log(delta, ele.innerText)
+      if (delta > 0) {
+        startingPoint = ele;
+      }
+    })
+    console.log(startingPoint.innerText);
+    document.querySelector('#cat_container').scrollLeft = document.querySelector('#cat_container').scrollLeft + startingPoint.getBoundingClientRect().x;
+  }
+
+  const scrolltoStart = () => {
+    document.querySelector('#cat_container').scrollLeft = 0;
+    // let list = document.querySelector('#cat_container').childNodes;
+    // console.log(list);
+  }
+
+  let categoryTabs = CATEGORY_LIST.map((ele, idx) => {
+    return (
+      <button
+        id={`t${idx}`}
+        onClick={() => {
+          setselectedTab(ele);
+        }}
+        className={(ele == selectedTab) ? styles.categoryTabSelected : styles.categoryTab} key={'cat' + idx}>
+        {ele}
+      </button>
+    )
+  })
+  return (
+    <div className={styles.categoryTabConWrapper}>
+      <button className={styles.scrollStart} onClick={scrolltoStart} />
+      <div id='cat_container' className={styles.categoryTabCon}>
+        {categoryTabs}
+      </div>
+      <button className={styles.scrollEnd} onClick={scrolltoEnd} />
+    </div>
+  )
+}
 
 export default function Home() {
+
+
   return (
     <>
-
+      <Nav />
       <div className={styles.container}>
         <Head>
           <title>Create Next App</title>
@@ -17,8 +106,10 @@ export default function Home() {
         </Head>
         <main className={styles.home}>
           <div className={styles.hero}>
-            <img className={styles.float1} src="./hero_float_1.png" alt="" />
-            <img className={styles.float2} src="./hero_float_2.png" alt="" />
+            <img className={styles.float1_desktop} src="./hero_float_1.png" alt="" />
+            <img className={styles.float2_desktop} src="./hero_float_2.png" alt="" />
+            <img className={styles.float1_mobile} src="./hero_float_1_mobile.png" alt="" />
+            <img className={styles.float2_mobile} src="./hero_float_2_mobile.png" alt="" />
             <h1 className={styles.title}>
               Learn web3 with <span className={styles.gradText}>Truts</span>
             </h1>
@@ -28,6 +119,7 @@ export default function Home() {
               <button className={styles.secBtn}><img src="./compass.png" alt="" />Explore Opportunities</button>
             </span>
           </div>
+          <ScrollCon />
           <div className={styles.content}>
             <div className={styles.section}>
               <h1 className={styles.secTitle}>Chains</h1>
