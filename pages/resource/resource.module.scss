@@ -60,6 +60,7 @@ $PHONE_N: 560;
     @media (max-width: 1100px) {
         justify-content: center;
         width: 90%;
+
         p {
             width: 100%;
         }
@@ -68,6 +69,7 @@ $PHONE_N: 560;
         flex-direction: column;
         justify-content: center;
         width: 90%;
+        margin-top: 90px;
         img {
             width: 61px;
             height: 57.95px;
@@ -125,6 +127,26 @@ $PHONE_N: 560;
         height: 53.99px;
         margin-right: 17px;
     }
+
+    .rInfo {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .btnNav {
+        display: flex;
+        align-items: center;
+        margin-top: auto;
+        height: fit-content;
+        .icon {
+            width: 17.35px;
+            height: min-content;
+            margin-left: auto;
+            cursor: pointer;
+        }
+    }
+
     button {
         border: none;
         background: linear-gradient(90deg, #5e1ed1 0%, #3065f3 100%);
@@ -134,7 +156,6 @@ $PHONE_N: 560;
         width: 166px;
         height: 36px;
         font-size: 12px;
-        margin-top: 20px;
         border-radius: 12.7685px;
     }
     h1 {
@@ -184,7 +205,6 @@ $PHONE_N: 560;
             width: phone_fluid(166);
             height: phone_fluid(36);
             font-size: phone_fluid(12);
-            margin-top: phone_fluid(20);
             border-radius: phone_fluid(12.7685);
         }
         h1 {
@@ -203,7 +223,7 @@ $PHONE_N: 560;
                 padding: 0 phone_fluid(5);
                 border: phone_fluid(0.46223) solid #747c90;
                 border-radius: phone_fluid(7.39568);
-                width: phone_fluid(150.58);
+                //width: phone_fluid(150.58);
                 height: phone_fluid(27.73);
             }
         }

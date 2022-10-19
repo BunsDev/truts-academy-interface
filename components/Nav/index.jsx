@@ -52,36 +52,36 @@ export default function Component({ isFloating, isStrech }) {
                 style={(isFloating == true) ? { position: 'fixed' } : { position: 'absolute' }}
                 className={styles.navWrapper}>
                 <div style={isStrech ? { maxWidth: '100%' } : { maxWidth: '1440px' }} className={styles.nav}>
-                    <Link href={'/'}><img className={styles.logo} src={logo.src} alt="" /></Link>
+                    <Link href={'/'}><img className={styles.logo} src={'/logo.svg'} alt="" /></Link>
                     {
                         isFloating &&
                         <span className={styles.search_wrappper}>  <Search /></span>
                     }
                     <ul className={styles.links}>
-                        <Link href={'/add-your-community'}><li>Add a Community</li></Link>
-                        <Link href={'/discover'}><li>Discover Communities</li></Link>
-                        {(walletState?.address?.length > 5)
+                        {/* <Link href={'/add-your-community'}><li>Add a Community</li></Link> */}
+                        <Link href={'https://truts.xyz/discover'}><li>Discover Communities</li></Link>
+                        {/* {(walletState?.address?.length > 5)
                             ? // wallet connected
                             <li className={styles.profileIcon}>
                                 <img className={styles.pixel_icon} alt='' src={pixel_icon.src} />
 
-                                {/* <ProfileDropDown walletState={walletState} /> */}
+                                {<ProfileDropDown walletState={walletState} />}
 
                             </li>
-                            :  // connect wallet
-                            <li
-                                onClick={() => {
-                                    setwalletConnectVisible(true)
-                                }}>
-                                <img alt='' src={wallet_icon.src} />
-                            </li>}
+                            : connect wallet
+                        <li
+                            onClick={() => {
+                                setwalletConnectVisible(true)
+                            }}>
+                            <img alt='' src={wallet_icon.src} />
+                        </li>} */}
                     </ul>
 
-                    <span className={styles.search_menu} onClick={() => {
+                    {/* <span className={styles.search_menu} onClick={() => {
                         setTabletSearchOpen(!TabletSearchOpen)
                     }}  >
                         <img src={search_icon.src} alt="" />
-                    </span>
+                    </span> */}
                     <span className={styles.ham_burger_menu} onClick={() => {
                         setTabletNavOpen(!TabletNavOpen);
                     }}  >
@@ -116,20 +116,20 @@ const TabletNav = ({ TabletNavOpen, setTabletNavOpen, walletConnectVisible, setw
                             Home
                         </li>
                     </Link>
-                    <Link href={'/add-your-community'}>
+                    {/* <Link href={'/add-your-community'}>
                         <li>
                             Add a Community
                         </li>
-                    </Link>
-                    <Link href={'/discover'}>
+                    </Link> */}
+                    <Link href={'https://truts.xyz/discover'}>
                         <li>
-                            Discover a Communities
+                            Discover Communities
                         </li>
                     </Link>
                 </ul>
-                <div className={styles.btn_wrapper}>
+                {/* <div className={styles.btn_wrapper}>
                     <Button onClick={() => { setwalletConnectVisible(true) }} label={"Connect wallet"} />
-                </div>
+                </div> */}
             </div>
         </div>
     )
