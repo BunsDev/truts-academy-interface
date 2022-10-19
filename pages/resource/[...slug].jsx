@@ -3,6 +3,7 @@ import styles from './resource.module.scss'
 import Footer from '../../components/Footer'
 import Nav from '../../components/Nav'
 import axios from 'axios'
+import Head from 'next/head'
 
 
 function Index({ data, slug }) {
@@ -13,6 +14,11 @@ function Index({ data, slug }) {
 
     return (
         <><Nav />
+            <Head>
+                <title>Truts Academy</title>
+                <meta name="description" content="Truts Academy" />
+                <link rel="icon" href="/favicon.png" />
+            </Head>
             <div className={styles.chainPage}>
                 <div className={styles.head}>
                     <img src="/polygonIcon.png" alt="" />
