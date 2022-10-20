@@ -35,11 +35,11 @@ export default function Home({ data }) {
             <h2>The Web3 education platform for developers, by developers</h2>
             <span className={styles.heroBtnSec}>
               <button onClick={() => { openNewTab('http://discord.truts.xyz') }} className={styles.primaryBtn}><img style={{ filter: `invert(100%)` }} src="./discord.svg" alt="" />Join Truts</button>
-              <button onClick={() => { openNewTab('http://truts.xyz') }} className={styles.secBtn}><img src="./compass.png" alt="" />Explore Resources</button>
+              <button onClick={() => { document.getElementById('content').scrollIntoView({ behavior: "smooth" }) }} className={styles.secBtn}><img src="./compass.png" alt="" />Explore Resources</button>
             </span>
           </div>
           {/* <ScrollCon /> */}
-          <div className={styles.content}>
+          <div className={styles.content} id='content'>
             <div className={styles.section}>
               <h1 className={styles.secTitle}>Chains</h1>
               <div className={styles.resourceCon}>
@@ -102,8 +102,8 @@ const Resource = ({ data, count, slug }) => {
   }
 
   let description = data.protocol_description;
-  if (description.length > 110) {
-    description = description.slice(0, 110) + '...';
+  if (description.length > 90) {
+    description = (description.slice(0, 90) + '...').normalize();
   }
 
   return (
