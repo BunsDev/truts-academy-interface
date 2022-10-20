@@ -44,7 +44,7 @@ function Index({ data, slug }) {
 
 const Resource = ({ data }) => {
 
-    let description = data.providers[0].provider_description;
+    let description = data.providers[0].provider_description || data.protocols[0].protocol_description;
     if (description.length > 150) {
         console.log(description.length)
         description = description.slice(0, 150) + '...';

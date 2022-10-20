@@ -106,12 +106,19 @@ const Resource = ({ data, count, slug }) => {
     description = (description.slice(0, 90) + '...').normalize();
   }
 
+  let title = data.protocol_name.normalize();
+  let TITLE_LENGTH = 25
+  if (title.length > TITLE_LENGTH) {
+    console.log(description.length)
+    title = title.slice(0, TITLE_LENGTH) + '...';
+  }
+
   return (
     <Link href={`/resource/${slug}`}>
       <div className={styles.resource}>
         <img src={data.protocol_logo} alt="" />
         <span>
-          <h1>{data.protocol_name}</h1>
+          <h1>{title}</h1>
           <h3>{count} courses</h3>
           <p>{description}</p>
         </span>
