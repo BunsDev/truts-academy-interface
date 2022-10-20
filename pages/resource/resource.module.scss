@@ -171,6 +171,8 @@ $PHONE_N: 560;
         width: 405px;
         font-size: 14px;
         margin-top: 20px;
+        color: rgb(101, 108, 116);
+        letter-spacing: 1.1px;
     }
     .tags {
         display: flex;
@@ -183,11 +185,13 @@ $PHONE_N: 560;
             align-items: center;
             background: #ffffff;
             /* dark grey 100 */
-            padding: 0 10px;
-            border: 0.46223px solid #747c90;
+            padding: 0 6px;
+            background-color: rgba(212, 220, 255, 0.671);
+           // border: 0.46223px solid #747c90;
             border-radius: 7.39568px;
             width: auto;
             height: 27.73px;
+            font-size: 12px;
         }
     }
 
