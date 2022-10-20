@@ -127,6 +127,7 @@ $PHONE_N: 560;
     height: 309.5px;
     border-radius: 16px;
     padding: 37px 20px;
+    
     img {
         width: 53.99px;
         height: 53.99px;
@@ -164,6 +165,10 @@ $PHONE_N: 560;
         height: 36px;
         font-size: 12px;
         border-radius: 12.7685px;
+        &:hover {
+            transition: all 0.35s ease-in-out;
+            background: linear-gradient(90deg, #4910ae 0%, #1248d9 100%);
+        }
     }
     h1 {
         font-weight: 600;
