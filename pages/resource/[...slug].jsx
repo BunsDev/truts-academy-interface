@@ -21,7 +21,7 @@ function Index({ data, slug }) {
             </Head>
             <div className={styles.chainPage}>
                 <div className={styles.head}>
-                    <img src="/polygonIcon.png" alt="" />
+                    <img src={formatedData[0].protocols[0].protocol_logo} alt="" />
                     <div className={styles.info}>
                         <h1>{resource_type}</h1>
                         <h2>About {resource_type}</h2>
@@ -52,7 +52,7 @@ const Resource = ({ data }) => {
 
     return (
         <div className={styles.resource}>
-            <img src="/polygonIcon.png" alt="" />
+            <img src={data.providers[0].provider_logo} alt="" />
             <div className={styles.rInfo}>
                 <h1>{data.title}</h1>
                 <div className={styles.tags}>

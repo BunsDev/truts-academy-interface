@@ -109,7 +109,7 @@ const Resource = ({ data, count, slug }) => {
   return (
     <Link href={`/resource/${slug}`}>
       <div className={styles.resource}>
-        <img src="./polygonIcon.png" alt="" />
+        <img src={data.protocol_logo} alt="" />
         <span>
           <h1>{data.protocol_name}</h1>
           <h3>{count} courses</h3>
