@@ -22,6 +22,10 @@ export default function Home({ data }) {
           <title>Truts Academy</title>
           <meta name="description" content="Truts Academy" />
           <link rel="icon" href="/favicon.png" />
+          <link rel="preload" href="./hero_float_1.png" as='image' />
+          <link rel="preload" href="./hero_float_2.png" as='image' />
+          <link rel="preload" href="./hero_float_1_mobile.png" as='image' />
+          <link rel="preload" href="./hero_float_2_mobile.png" as='image' />
         </Head>
         <main className={styles.home}>
           <div className={styles.hero}>
