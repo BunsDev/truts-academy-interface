@@ -48,7 +48,7 @@ export default function Home({ data }) {
               <h1 className={styles.secTitle}>Chains</h1>
               <div className={styles.resourceCon}>
                 {
-                  Object.keys(data['chain']).map((ele, idx) => {
+                  Object.keys(data['chain']).sort().map((ele, idx) => {
                     let type = 'chain'
                     let formated_data = data[type][`${ele}`][0].protocols[0];
                     let count = data[type][`${ele}`].length;
@@ -64,7 +64,7 @@ export default function Home({ data }) {
               <h1 className={styles.secTitle}>Infra and Tools</h1>
               <div className={styles.resourceCon}>
                 {
-                  Object.keys(data['infra']).map((ele, idx) => {
+                  Object.keys(data['infra']).sort().map((ele, idx) => {
                     let type = 'infra'
                     let formated_data = data[type][`${ele}`][0].protocols[0];
                     let count = data[type][`${ele}`].length;
@@ -80,7 +80,7 @@ export default function Home({ data }) {
               <h1 className={styles.secTitle}>Defi</h1>
               <div className={styles.resourceCon}>
                 {
-                  Object.keys(data['defi']).map((ele, idx) => {
+                  Object.keys(data['defi']).sort().map((ele, idx) => {
                     let type = 'defi'
                     let formated_data = data[type][`${ele}`][0].protocols[0];
                     let count = data[type][`${ele}`].length;
