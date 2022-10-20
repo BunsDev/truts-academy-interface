@@ -57,7 +57,7 @@ export default function Home({ data }) {
               </div>
             </div>
             <div className={styles.section}>
-              <h1 className={styles.secTitle}>Tools</h1>
+              <h1 className={styles.secTitle}>Infra and Tools</h1>
               <div className={styles.resourceCon}>
                 {
                   Object.keys(data['infra']).map((ele, idx) => {
@@ -73,7 +73,7 @@ export default function Home({ data }) {
               </div>
             </div>
             <div className={styles.section}>
-              <h1 className={styles.secTitle}>Infra</h1>
+              <h1 className={styles.secTitle}>Defi</h1>
               <div className={styles.resourceCon}>
                 {
                   Object.keys(data['defi']).map((ele, idx) => {

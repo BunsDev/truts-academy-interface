@@ -50,11 +50,22 @@ const Resource = ({ data }) => {
         description = description.slice(0, 150) + '...';
     }
 
+    let title = data.title.normalize();
+    let TITLE_LENGTH = 25
+    if (title.length > TITLE_LENGTH) {
+        console.log(description.length)
+        title = title.slice(0, TITLE_LENGTH) + '...';
+    }
+
     return (
         <div className={styles.resource}>
-            <img src={data.providers[0].provider_logo} alt="" />
+            <img onError={(e) => {
+                e.target.src = data.protocols[0].protocol_logo;
+            }}
+
+                src={data.providers[0].provider_logo || data.protocols[0].protocol_logo} alt="" />
             <div className={styles.rInfo}>
-                <h1>{data.title}</h1>
+                <h1>{title}</h1>
                 <div className={styles.tags}>
                     {
                         data.tags.map((ele) => {
