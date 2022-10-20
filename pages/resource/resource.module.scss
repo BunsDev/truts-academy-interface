@@ -109,11 +109,14 @@ $PHONE_N: 560;
     flex-wrap: wrap;
     gap: 16px;
     margin: 0 auto;
-    justify-content: center;
+    justify-content: left;
     margin-top: 16px;
     margin-bottom: 50px;
     @media (max-width: 1100px) {
         width: 90%;
+    }
+    @media (max-width: 1300px) {
+        justify-content: center;
     }
 }
 
