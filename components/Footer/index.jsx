@@ -7,7 +7,7 @@ import axios from 'axios'
 import Button from '../Button'
 
 // CONSTANTS
-const API = process.env.API
+const API = process.env.TRUTS_API
 
 //utils 
 import openNewTab from '../../utils/openNewTab'
@@ -48,10 +48,15 @@ export default function Component() {
             <span className={styles.email}>
                 <input value={email} onChange={(e) => {
                     setemail(e.target.value);
+                }} onKeyUp={(e) => {
+                    if (e.key == 'Enter') {
+                        saveEmail();
+                    }
                 }} placeholder={'Enter Email address'} type="text" />
-                <img onClick={() => {
-                    saveEmail();
-                }} src={arrow_icon.src} alt="" />
+                <img styles={{ cursor: "pointer" }} onClick={
+                    () => {
+                        saveEmail();
+                    }} src={arrow_icon.src} alt="" />
             </span>
             <ul className={styles.links}>
                 <Link href={'/'} ><li>Home</li></Link>

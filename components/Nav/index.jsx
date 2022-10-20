@@ -23,7 +23,7 @@ import Button from '../Button'
 // import WalletConnect from '../WalletConnect'
 
 // CONSTANTS
-const API = process.env.API
+const API = process.env.TRUTS_API
 
 export default function Component({ isFloating, isStrech }) {
 
