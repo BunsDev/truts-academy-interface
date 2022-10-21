@@ -27,14 +27,14 @@ export default function Home({ data }) {
           <meta property="og:url" content="https://www.academy.truts.xyz/" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="Truts Academy" />
-          <meta property="og:description" content="Truts Academy" />
+          <meta property="og:description" content="Only place for all the Developer Resources in Web3" />
           <meta property="og:image" content="/favicon.png" />
 
           <meta name="twitter:card" content="summary_large_image" />
           <meta property="twitter:domain" content="academy.truts.xyz" />
           <meta property="twitter:url" content="https://www.academy.truts.xyz/" />
           <meta name="twitter:title" content="Truts Academy" />
-          <meta name="twitter:description" content="Truts Academy" />
+          <meta name="twitter:description" content="Only place for all the Developer Resources in Web3" />
           <meta name="twitter:image" content="/favicon.png" />
 
           <link rel="preload" href="./hero_float_1.png" as='image' />
@@ -51,7 +51,7 @@ export default function Home({ data }) {
             <h1 className={styles.title}>
               Learn web3 with <span className={styles.gradText}>Truts</span>
             </h1>
-            <h2>The Web3 education platform for developers, by developers</h2>
+            <h2>Only place for all the Developer Resources in Web3</h2>
             <span className={styles.heroBtnSec}>
               <button onClick={() => { openNewTab('http://discord.truts.xyz') }} className={styles.primaryBtn}><img style={{ filter: `invert(100%)` }} src="./discord.svg" alt="" />Join Truts</button>
               <button onClick={() => { document.getElementById('content').scrollIntoView({ behavior: "smooth" }) }} className={styles.secBtn}><img src="./compass.png" alt="" />Explore Resources</button>
