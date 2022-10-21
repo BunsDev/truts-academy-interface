@@ -22,6 +22,21 @@ export default function Home({ data }) {
           <title>Truts Academy</title>
           <meta name="description" content="Truts Academy" />
           <link rel="icon" href="/favicon.png" />
+
+
+          <meta property="og:url" content="https://www.academy.truts.xyz/" />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="Truts Academy" />
+          <meta property="og:description" content="Truts Academy" />
+          <meta property="og:image" content="/favicon.png" />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta property="twitter:domain" content="academy.truts.xyz" />
+          <meta property="twitter:url" content="https://www.academy.truts.xyz/" />
+          <meta name="twitter:title" content="Truts Academy" />
+          <meta name="twitter:description" content="Truts Academy" />
+          <meta name="twitter:image" content="/favicon.png" />
+
           <link rel="preload" href="./hero_float_1.png" as='image' />
           <link rel="preload" href="./hero_float_2.png" as='image' />
           <link rel="preload" href="./hero_float_1_mobile.png" as='image' />
