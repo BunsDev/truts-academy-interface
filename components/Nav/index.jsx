@@ -58,7 +58,7 @@ export default function Component({ isFloating, isStrech }) {
                         <span className={styles.search_wrappper}>  <Search /></span>
                     }
                     <ul className={styles.links}>
-                        {/* <Link href={'/add-your-community'}><li>Add a Community</li></Link> */}
+                        <Link href={'/add-resource.html'}><li>Add Resources</li></Link>
                         <Link href={'https://truts.xyz/discover'}><li>Discover Communities</li></Link>
                         {/* {(walletState?.address?.length > 5)
                             ? // wallet connected
@@ -116,11 +116,11 @@ const TabletNav = ({ TabletNavOpen, setTabletNavOpen, walletConnectVisible, setw
                             Home
                         </li>
                     </Link>
-                    {/* <Link href={'/add-your-community'}>
+                    <Link href={'/add-resource.html'}>
                         <li>
-                            Add a Community
+                            Add Resources
                         </li>
-                    </Link> */}
+                    </Link>
                     <Link href={'https://truts.xyz/discover'}>
                         <li>
                             Discover Communities

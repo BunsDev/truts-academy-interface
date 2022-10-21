@@ -60,8 +60,8 @@ export default function Component() {
             </span>
             <ul className={styles.links}>
                 <Link href={'/'} ><li>Home</li></Link>
-                <Link href={'/add-your-community'} ><li>Add a Community</li></Link>
-                <Link href={'/discover'} ><li>Explore Communities</li></Link>
+                <Link href={'/add-resource.html'} ><li>Add Resources</li></Link>
+                <Link href={'https://truts.xyz/discover'} ><li>Explore Communities</li></Link>
                 {/* <Link href={'/discover'} ><li>Review Communities</li></Link> */}
                 <Link href={'https://discord.truts.xyz'} ><li>Contact Us</li></Link>
             </ul>
