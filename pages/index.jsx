@@ -2,11 +2,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from './Home/home.module.scss'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Footer from '../components/Footer'
 import Nav from '../components/Nav'
 import axios from 'axios'
 import { invert } from 'lodash'
+
 
 const CATEGORY_LIST = ['chain', 'infra', 'defi'];
 
@@ -115,20 +116,32 @@ export default function Home({ data }) {
 }
 
 const Resource = ({ data, count, slug }) => {
+ console.log(data)
+  let para = useRef(count)
+  const [TITLE_LENGTH, setTITLE_LENGTH] = useState(15);
+  const [DESC_LENGTH, setDESC_LENGTH] = useState(80);
+
+  useEffect(() => {
+    let paraElm = getComputedStyle(para.current);
+    let pararHeight = paraElm.getPropertyValue('height');
+    if (pararHeight == '84px') {
+      console.log("trim")
+      setDESC_LENGTH((c) => { return (c - 20) })
+    }
+
+  }, [DESC_LENGTH])
 
   if (!(data?.protocol_name.length > 1)) {
     return null
   }
 
   let description = data.protocol_description;
-  if (description.length > 90) {
-    description = (description.slice(0, 90) + '...').normalize();
+  if (description.length > DESC_LENGTH) {
+    description = (description.slice(0, DESC_LENGTH) + '...').normalize();
   }
 
   let title = data.protocol_name.normalize();
-  let TITLE_LENGTH = 25
   if (title.length > TITLE_LENGTH) {
-    console.log(description.length)
     title = title.slice(0, TITLE_LENGTH) + '...';
   }
 
@@ -139,7 +152,7 @@ const Resource = ({ data, count, slug }) => {
         <span>
           <h1>{title}</h1>
           <h3>{count} courses</h3>
-          <p>{description}</p>
+          <p ref={para}>{description}</p>
         </span>
       </div>
     </Link>
