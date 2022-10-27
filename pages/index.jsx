@@ -116,7 +116,6 @@ export default function Home({ data }) {
 }
 
 const Resource = ({ data, count, slug }) => {
- console.log(data)
   let para = useRef(count)
   const [TITLE_LENGTH, setTITLE_LENGTH] = useState(15);
   const [DESC_LENGTH, setDESC_LENGTH] = useState(80);
