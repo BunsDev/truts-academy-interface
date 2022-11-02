@@ -113,8 +113,14 @@ export default function Home({ data }) {
                 {
                   Object.keys(data['technology']).sort().map((ele, idx) => {
                     let type = 'technology'
-                    let formated_data = data[type][`${ele}`][0].protocols[0];
+                    // let formated_data = data[type][`${ele}`][0].protocols[0];
+                    let formated_data;
                     let count = data[type][`${ele}`].length;
+                    data[type][`${ele}`][0].protocols.forEach((elx) => {
+                      if (elx.protocol_name == ele) {
+                        formated_data = elx
+                      }
+                    })
                     return (
                       <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
                     )
@@ -133,7 +139,7 @@ export default function Home({ data }) {
 const Resource = ({ data, count, slug }) => {
   let para = useRef(count)
   const [TITLE_LENGTH, setTITLE_LENGTH] = useState(15);
-  const [DESC_LENGTH, setDESC_LENGTH] = useState(80);
+  const [DESC_LENGTH, setDESC_LENGTH] = useState(75);
 
   useEffect(() => {
     let paraElm = getComputedStyle(para.current);
@@ -152,6 +158,10 @@ const Resource = ({ data, count, slug }) => {
   let description = data.protocol_description;
   if (description.length > DESC_LENGTH) {
     description = (description.slice(0, DESC_LENGTH) + '...').normalize();
+  }
+
+  if (data.protocol_name == 'HardHat') {
+    console.log(data)
   }
 
   let title = data.protocol_name.normalize();
