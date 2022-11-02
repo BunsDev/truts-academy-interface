@@ -109,10 +109,12 @@ export async function getServerSideProps(ctx) {
     let { slug } = ctx.query
     let data = await fetchData();
 
-    let formatedData = { 'chain': {}, 'infra': {}, 'defi': {} }
+    let formatedData = { 'chain': {}, 'infra': {}, 'defi': {}, 'technology': {} }
     data.items.forEach((ele) => {
         try {
-            formatedData[`${ele.protocols[0].protocol_type}`][`${ele.protocols[0].protocol_name}`] = [];
+            ele.protocols.forEach((x, idx) => {
+                formatedData[`${ele.protocols[0].protocol_type}`][`${ele.protocols[idx].protocol_name}`] = [];
+            })
         }
         catch (er) {
 
@@ -120,13 +122,14 @@ export async function getServerSideProps(ctx) {
     })
     data.items.forEach((ele) => {
         try {
-            formatedData[`${ele.protocols[0].protocol_type}`][`${ele.protocols[0].protocol_name}`].push(ele)
+            ele.protocols.forEach((x, idx) => {
+                formatedData[`${ele.protocols[0].protocol_type}`][`${ele.protocols[idx].protocol_name}`].push(ele)
+            })
         }
         catch (er) {
 
         }
     })
-
     return {
         props: {
             data: formatedData,

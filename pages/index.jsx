@@ -9,11 +9,11 @@ import axios from 'axios'
 import { invert } from 'lodash'
 
 
-const CATEGORY_LIST = ['chain', 'infra', 'defi'];
+const CATEGORY_LIST = ['chain', 'infra', 'defi', 'technology'];
 
 export default function Home({ data }) {
 
-  //console.log(data);
+  console.log(data);
 
   return (
     <>
@@ -98,6 +98,21 @@ export default function Home({ data }) {
                 {
                   Object.keys(data['defi']).sort().map((ele, idx) => {
                     let type = 'defi'
+                    let formated_data = data[type][`${ele}`][0].protocols[0];
+                    let count = data[type][`${ele}`].length;
+                    return (
+                      <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
+                    )
+                  })
+                }
+              </div>
+            </div>
+            <div className={styles.section}>
+              <h1 className={styles.secTitle}>Technology</h1>
+              <div className={styles.resourceCon}>
+                {
+                  Object.keys(data['technology']).sort().map((ele, idx) => {
+                    let type = 'technology'
                     let formated_data = data[type][`${ele}`][0].protocols[0];
                     let count = data[type][`${ele}`].length;
                     return (
@@ -226,10 +241,12 @@ const fetchData = async () => {
 export async function getServerSideProps(context) {
   let data = await fetchData();
 
-  let formatedData = { 'chain': {}, 'infra': {}, 'defi': {} }
+  let formatedData = { 'chain': {}, 'infra': {}, 'defi': {}, 'technology': {} }
   data.items.forEach((ele) => {
     try {
-      formatedData[`${ele.protocols[0].protocol_type}`][`${ele.protocols[0].protocol_name}`] = [];
+      ele.protocols.forEach((x, idx) => {
+        formatedData[`${ele.protocols[0].protocol_type}`][`${ele.protocols[idx].protocol_name}`] = [];
+      })
     }
     catch (er) {
 
@@ -237,7 +254,9 @@ export async function getServerSideProps(context) {
   })
   data.items.forEach((ele) => {
     try {
-      formatedData[`${ele.protocols[0].protocol_type}`][`${ele.protocols[0].protocol_name}`].push(ele)
+      ele.protocols.forEach((x, idx) => {
+        formatedData[`${ele.protocols[0].protocol_type}`][`${ele.protocols[idx].protocol_name}`].push(ele)
+      })
     }
     catch (er) {
 
