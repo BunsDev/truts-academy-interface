@@ -108,7 +108,7 @@ export default function Home({ data }) {
               </div>
             </div>
             <div className={styles.section}>
-              <h1 className={styles.secTitle}>Technology</h1>
+              <h1 className={styles.secTitle}>Technologies</h1>
               <div className={styles.resourceCon}>
                 {
                   Object.keys(data['technology']).sort().map((ele, idx) => {
