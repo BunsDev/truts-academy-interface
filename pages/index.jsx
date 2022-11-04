@@ -54,7 +54,7 @@ export default function Home({ data }) {
             </h1>
             <h2>Only place for all the Developer Resources in Web3</h2>
             <span className={styles.heroBtnSec}>
-              <button onClick={() => { openNewTab('http://discord.truts.xyz') }} className={styles.primaryBtn}><img style={{ filter: `invert(100%)` }} src="./discord.svg" alt="" />Join Truts</button>
+              <button onClick={() => { openNewTab('https://discord.gg/ZeMkBuKpKe') }} className={styles.primaryBtn}><img style={{ filter: `invert(100%)` }} src="./discord.svg" alt="" />Join Truts</button>
               <button onClick={() => { document.getElementById('content').scrollIntoView({ behavior: "smooth" }) }} className={styles.secBtn}><img src="./compass.png" alt="" />Explore Resources</button>
             </span>
           </div>
