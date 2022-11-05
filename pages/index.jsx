@@ -7,13 +7,14 @@ import Footer from '../components/Footer'
 import Nav from '../components/Nav'
 import axios from 'axios'
 import { invert } from 'lodash'
+import fetchData from '../utils/fetchData'
 
 
-const CATEGORY_LIST = ['chain', 'infra', 'defi', 'technology'];
+const CATEGORY_LIST = ['hackathons', 'chains', 'infra', 'defi', 'technology'];
 
 export default function Home({ data }) {
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
@@ -59,8 +60,29 @@ export default function Home({ data }) {
             </span>
           </div>
           {/* <ScrollCon /> */}
+          <div className={styles.tabSelector}>
+            {CATEGORY_LIST.map((ele) => {
+              return <p onClick={() => { document.getElementById(ele).scrollIntoView({ behavior: "smooth" }) }} key={ele + 'tb'}>{ele}</p>
+            })}
+          </div>
           <div className={styles.content} id='content'>
-            <div className={styles.section}>
+            <div className={styles.section} id={'hackathons'}>
+              <h1 className={styles.secTitle}>Hackathons</h1>
+              <div className={styles.resourceCon}>
+                {
+                  Object.keys(data['hackathons']).sort().map((ele, idx) => {
+                    let type = 'hackathons'
+                    let formated_data = data[type][`${ele}`][0].protocols[0];
+                    let count = data[type][`${ele}`].length;
+
+                    return (
+                      <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
+                    )
+                  })
+                }
+              </div>
+            </div>
+            <div className={styles.section} id={'chains'}>
               <h1 className={styles.secTitle}>Chains</h1>
               <div className={styles.resourceCon}>
                 {
@@ -76,7 +98,7 @@ export default function Home({ data }) {
                 }
               </div>
             </div>
-            <div className={styles.section}>
+            <div className={styles.section} id={'infra'}>
               <h1 className={styles.secTitle}>Infra and Tools</h1>
               <div className={styles.resourceCon}>
                 {
@@ -92,7 +114,7 @@ export default function Home({ data }) {
                 }
               </div>
             </div>
-            <div className={styles.section}>
+            <div className={styles.section} id={'defi'} >
               <h1 className={styles.secTitle}>Defi</h1>
               <div className={styles.resourceCon}>
                 {
@@ -107,7 +129,7 @@ export default function Home({ data }) {
                 }
               </div>
             </div>
-            <div className={styles.section}>
+            <div className={styles.section} id={"technology"}>
               <h1 className={styles.secTitle}>Technologies</h1>
               <div className={styles.resourceCon}>
                 {
@@ -234,24 +256,10 @@ const ScrollCon = () => {
 }
 
 
-const fetchData = async () => {
-  const options = {
-    headers: {
-      Authorization:
-        "Admin eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjcxMTE1MTIsImlkIjoibWJ6MzgzaW54bzk2YjZxIiwidHlwZSI6ImFkbWluIn0.bNUQUKgCZbltPBBq_9IW_6-zoSSuMBWeNjzd83M6jO4",
-      "Content-Type": "application/json",
-    },
-  };
-  let res = await axios.get(`${process.env.API}/api/collections/resource/records?perPage=${9999}`, options);
-  console.log(res.data);
-  return res.data;
-}
-
-
 export async function getServerSideProps(context) {
   let data = await fetchData();
 
-  let formatedData = { 'chain': {}, 'infra': {}, 'defi': {}, 'technology': {} }
+  let formatedData = { 'chain': {}, 'infra': {}, 'defi': {}, 'technology': {}, 'hackathons': {} }
   data.items.forEach((ele) => {
     try {
       ele.protocols.forEach((x, idx) => {
@@ -271,6 +279,24 @@ export async function getServerSideProps(context) {
     catch (er) {
 
     }
+  })
+
+  data.items.forEach((ele) => {
+
+    if (!ele.hackathons) {
+      return
+    }
+
+    formatedData['hackathons'][ele.hackathons[0].hackathon_name] = []
+  })
+
+  data.items.forEach((ele) => {
+
+    if (!ele.hackathons) {
+      return
+    }
+
+    formatedData['hackathons'][ele.hackathons[0].hackathon_name].push(ele)
   })
 
   return {

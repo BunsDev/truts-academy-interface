@@ -187,6 +187,7 @@
 
 .section {
     display: flex;
+    width: 100%;
     max-width: 1300px;
     flex-direction: column;
     margin-bottom: 40px;
@@ -285,10 +286,11 @@
     width: min(90vw, 1350px);
     justify-content: center;
     z-index: 1000;
+    height: min-content;
     .scrollEnd {
         margin-bottom: 9px;
-        height: 30px;
-        width: 30px;
+        min-height: 30px;
+        min-width: 30px;
         background: url("../../assets/icons/scroll_end.svg");
         background-size: contain;
         border: none;
@@ -300,6 +302,7 @@
         &:hover {
             border: 0.5px solid black;
         }
+        // margin-bottom: 15px
     }
     .scrollStart {
         @extend .scrollEnd;
@@ -341,4 +344,26 @@
     height: 36px;
     padding: 0 15px;
     color: white;
+}
+
+.tabSelector {
+    display: flex;
+    column-gap: 25px;
+    max-width: fit-content;
+    width: 90%;
+    margin: 0 auto;
+    overflow-y: auto;
+    margin: 0 auto;
+    p {
+        font-weight: 600;
+        font-size: 28px;
+        text-transform: capitalize;
+        color: rgba(0, 0, 0, 0.767);
+        cursor: pointer;
+        padding-bottom: 0px;
+
+        @media (max-width: 450px) {
+            font-size: 22px;
+        }
+    }
 }

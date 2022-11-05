@@ -4,7 +4,7 @@ import Footer from '../../components/Footer'
 import Nav from '../../components/Nav'
 import axios from 'axios'
 import Head from 'next/head'
-
+import fetchData from '../../utils/fetchData'
 
 function Index({ data, slug }) {
 
@@ -24,7 +24,7 @@ function Index({ data, slug }) {
                     <img src={formatedData[0].protocols[0].protocol_logo} alt="" />
                     <div className={styles.info}>
                         <h1>{resource_type}</h1>
-                        <h2>About {resource_type}</h2>
+                        {/* <h2>About {resource_type}</h2> */}
                         <p>{formatedData[0].protocols[0].protocol_description}</p>
                     </div>
                 </div>
@@ -70,10 +70,14 @@ const Resource = ({ data }) => {
                     {
                         data.tags.map((ele) => {
                             return (
-                                <span key={ele + data.title}>{ele}</span>
+                                <span className={styles.tag} key={ele + data.title}>{ele}</span>
                             )
                         }).splice(0, 4)
                     }
+                    <span className={styles.providerName}>
+                        <p>by</p>
+                        <h3>{data.providers[0].provider_name}</h3>
+                    </span>
                 </div>
                 <p>{description}</p>
                 <span className={styles.btnNav}>
@@ -90,18 +94,6 @@ const Resource = ({ data }) => {
 }
 
 
-const fetchData = async () => {
-    const options = {
-        headers: {
-            Authorization:
-                "Admin eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjcxMTE1MTIsImlkIjoibWJ6MzgzaW54bzk2YjZxIiwidHlwZSI6ImFkbWluIn0.bNUQUKgCZbltPBBq_9IW_6-zoSSuMBWeNjzd83M6jO4",
-            "Content-Type": "application/json",
-        },
-    };
-    let res = await axios.get(`${process.env.API}/api/collections/resource/records?perPage=${9999}`, options);
-    console.log(res.data);
-    return res.data;
-}
 
 
 export async function getServerSideProps(ctx) {
@@ -109,7 +101,7 @@ export async function getServerSideProps(ctx) {
     let { slug } = ctx.query
     let data = await fetchData();
 
-    let formatedData = { 'chain': {}, 'infra': {}, 'defi': {}, 'technology': {} }
+    let formatedData = { 'chain': {}, 'infra': {}, 'defi': {}, 'technology': {}, 'hackathons': {} }
     data.items.forEach((ele) => {
         try {
             ele.protocols.forEach((x, idx) => {
@@ -130,6 +122,25 @@ export async function getServerSideProps(ctx) {
 
         }
     })
+
+    data.items.forEach((ele) => {
+
+        if (!ele.hackathons) {
+            return
+        }
+
+        formatedData['hackathons'][ele.hackathons[0].hackathon_name] = []
+    })
+
+    data.items.forEach((ele) => {
+
+        if (!ele.hackathons) {
+            return
+        }
+
+        formatedData['hackathons'][ele.hackathons[0].hackathon_name].push(ele)
+    })
+
     return {
         props: {
             data: formatedData,

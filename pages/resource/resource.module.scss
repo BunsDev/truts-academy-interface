@@ -38,6 +38,7 @@ $PHONE_N: 560;
         font-size: 72px;
         // margin: 0;
         margin-bottom: 0;
+        margin-top: 15px;
     }
     h2 {
         font-weight: 600;
@@ -127,7 +128,7 @@ $PHONE_N: 560;
     height: 309.5px;
     border-radius: 16px;
     padding: 37px 20px;
-    
+
     img {
         width: 53.99px;
         height: 53.99px;
@@ -186,14 +187,13 @@ $PHONE_N: 560;
         font-size: 14px;
         margin-top: 20px;
         color: rgb(101, 108, 116);
-        letter-spacing: 1.1px;
     }
     .tags {
         display: flex;
         align-items: center;
         column-gap: 15px;
         margin-top: 12px;
-        span {
+        .tag {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -201,7 +201,7 @@ $PHONE_N: 560;
             /* dark grey 100 */
             padding: 0 6px;
             background-color: rgba(212, 220, 255, 0.671);
-           // border: 0.46223px solid #747c90;
+            // border: 0.46223px solid #747c90;
             border-radius: 7.39568px;
             width: auto;
             height: 27.73px;
@@ -237,7 +237,7 @@ $PHONE_N: 560;
             column-gap: phone_fluid(15);
             margin-top: phone_fluid(12);
             font-size: phone_fluid(12);
-            span {
+            .tag {
                 padding: 0 phone_fluid(5);
                 border: phone_fluid(0.46223) solid #747c90;
                 border-radius: phone_fluid(7.39568);
@@ -245,5 +245,28 @@ $PHONE_N: 560;
                 height: phone_fluid(27.73);
             }
         }
+    }
+}
+
+.providerName {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    width: max-content;
+    margin-left: auto;
+    p {
+        margin: 0;
+        margin-left: 5px;
+        font-size: 16px;
+        width: max-content;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.541);
+    }
+    h3 {
+        font-size: 16px;
+        margin: 0;
+        margin-left: 5px;
+        font-weight: 600;
+        color: #000000cb;
     }
 }
