@@ -75,6 +75,7 @@ export default function Home({ data }) {
                     let formated_data = data[type][`${ele}`][0].protocols[0];
                     let count = data[type][`${ele}`].length;
 
+                    formated_data.protocol_name = data[type][`${ele}`][0].hackathons[0].hackathon_name
                     return (
                       <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
                     )
