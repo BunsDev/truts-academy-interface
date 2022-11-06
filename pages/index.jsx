@@ -75,9 +75,8 @@ export default function Home({ data }) {
                     let formated_data = data[type][`${ele}`][0].protocols[0];
                     let count = data[type][`${ele}`].length;
 
-                    formated_data.protocol_name = data[type][`${ele}`][0].hackathons[0].hackathon_name
                     return (
-                      <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
+                      <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} hackathon_name={data[type][`${ele}`][0].hackathons[0].hackathon_name} />
                     )
                   })
                 }
@@ -159,7 +158,7 @@ export default function Home({ data }) {
   )
 }
 
-const Resource = ({ data, count, slug }) => {
+const Resource = ({ data, count, slug, hackathon_name }) => {
   let para = useRef(count)
   const [TITLE_LENGTH, setTITLE_LENGTH] = useState(15);
   const [DESC_LENGTH, setDESC_LENGTH] = useState(75);
@@ -187,7 +186,7 @@ const Resource = ({ data, count, slug }) => {
     console.log(data)
   }
 
-  let title = data.protocol_name.normalize();
+  let title = hackathon_name || data.protocol_name.normalize();
   if (title.length > TITLE_LENGTH) {
     title = title.slice(0, TITLE_LENGTH) + '...';
   }
