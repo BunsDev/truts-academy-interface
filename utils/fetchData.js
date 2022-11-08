@@ -9,7 +9,7 @@ const fetchData = async () => {
         },
     };
 
-    let res = await Promise.all([axios.get(`${process.env.API}/api/collections/resource/records?perPage=${9999}`, options), axios.get(`${process.env.API}/api/collections/resource/records?perPage=${9999}&page=2`, options)]);
+    let res = await Promise.all([axios.get(`${process.env.API}/api/collections/resource_/records?perPage=${9999}`, options), axios.get(`${process.env.API}/api/collections/resource_/records?perPage=${9999}&page=2`, options)]);
     let data1 = res[0].data;
     let data2 = res[1].data;
 
