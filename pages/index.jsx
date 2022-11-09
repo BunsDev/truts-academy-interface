@@ -72,11 +72,10 @@ export default function Home({ data }) {
                 {
                   Object.keys(data['hackathons']).sort().map((ele, idx) => {
                     let type = 'hackathons'
-                    let formated_data = data[type][`${ele}`][0].protocols[0];
+                    let formated_data = data[type][`${ele}`][0].hackathons[0];
                     let count = data[type][`${ele}`].length;
-
                     return (
-                      <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} hackathon_name={data[type][`${ele}`][0].hackathons[0].hackathon_name} />
+                      <HackResource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} hackathon_name={data[type][`${ele}`][0].hackathons[0].hackathon_name} />
                     )
                   })
                 }
@@ -158,7 +157,55 @@ export default function Home({ data }) {
   )
 }
 
-const Resource = ({ data, count, slug, hackathon_name }) => {
+const HackResource = ({ data, count, slug }) => {
+
+  let cardData = data;
+
+  let para = useRef(count)
+  const [TITLE_LENGTH, setTITLE_LENGTH] = useState(15);
+  const [DESC_LENGTH, setDESC_LENGTH] = useState(75);
+
+  useEffect(() => {
+    let paraElm = getComputedStyle(para.current);
+    let pararHeight = paraElm.getPropertyValue('height');
+    if (pararHeight == '84px') {
+      console.log("trim")
+      setDESC_LENGTH((c) => { return (c - 20) })
+    }
+
+  }, [DESC_LENGTH])
+
+  if (!(data?.hackathon_name.length > 1)) {
+    return null
+  }
+
+  let description = cardData.description;
+  if (description.length > DESC_LENGTH) {
+    description = (description.slice(0, DESC_LENGTH) + '...').normalize();
+  }
+
+
+  let title = cardData.hackathon_name.normalize();
+  if (title.length > TITLE_LENGTH) {
+    title = title.slice(0, TITLE_LENGTH) + '...';
+  }
+
+  return (
+    <Link href={`/resource/${slug}`}>
+      <div className={styles.resource}>
+        <img src={cardData.hackathon_logo} alt="" />
+        <span>
+          <h1>{title}</h1>
+          <h3>{count} courses</h3>
+          <p ref={para}>{description}</p>
+        </span>
+      </div>
+    </Link>
+  )
+}
+
+
+const Resource = ({ data, count, slug }) => {
   let para = useRef(count)
   const [TITLE_LENGTH, setTITLE_LENGTH] = useState(15);
   const [DESC_LENGTH, setDESC_LENGTH] = useState(75);
@@ -186,7 +233,7 @@ const Resource = ({ data, count, slug, hackathon_name }) => {
     console.log(data)
   }
 
-  let title = hackathon_name || data.protocol_name.normalize();
+  let title = data.protocol_name.normalize();
   if (title.length > TITLE_LENGTH) {
     title = title.slice(0, TITLE_LENGTH) + '...';
   }

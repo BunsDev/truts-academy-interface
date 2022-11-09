@@ -12,6 +12,14 @@ function Index({ data, slug }) {
     console.log(type)
     let formatedData = data[type][resource_type]
 
+    let image = formatedData[0].protocols[0].protocol_logo;
+    let description = formatedData[0].protocols[0].protocol_description;
+
+    if (type == 'hackathons') {
+        image = formatedData[0].hackathons[0].hackathon_logo;
+        description = formatedData[0].hackathons[0].description
+    }
+
     return (
         <><Nav />
             <Head>
@@ -21,11 +29,11 @@ function Index({ data, slug }) {
             </Head>
             <div className={styles.chainPage}>
                 <div className={styles.head}>
-                    <img src={formatedData[0].protocols[0].protocol_logo} alt="" />
+                    <img src={image} alt="" />
                     <div className={styles.info}>
                         <h1>{resource_type}</h1>
                         {/* <h2>About {resource_type}</h2> */}
-                        <p>{formatedData[0].protocols[0].protocol_description}</p>
+                        <p>{description}</p>
                     </div>
                 </div>
                 <span className={styles.secTitle}>Resources</span>
