@@ -310,7 +310,7 @@ export async function getServerSideProps(context) {
   data.items.forEach((ele) => {
     try {
       ele.protocols.forEach((x, idx) => {
-        formatedData[`${ele.protocols[0].protocol_type}`][`${ele.protocols[idx].protocol_name}`] = [];
+        formatedData[`${ele.protocols[idx].protocol_type}`][`${ele.protocols[idx].protocol_name}`] = [];
       })
     }
     catch (er) {
@@ -320,7 +320,7 @@ export async function getServerSideProps(context) {
   data.items.forEach((ele) => {
     try {
       ele.protocols.forEach((x, idx) => {
-        formatedData[`${ele.protocols[0].protocol_type}`][`${ele.protocols[idx].protocol_name}`].push(ele)
+        formatedData[`${ele.protocols[idx].protocol_type}`][`${ele.protocols[idx].protocol_name}`].push(ele)
       })
     }
     catch (er) {
