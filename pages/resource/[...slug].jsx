@@ -20,6 +20,20 @@ function Index({ data, slug }) {
         description = formatedData[0].hackathons[0].description
     }
 
+    let priority = [];
+
+    formatedData = formatedData.filter((ele) => {
+        if (ele.title == 'Solana University') {
+            priority.push(ele)
+            return false
+        }
+        if (ele.title == 'Solana Core') {
+            priority.push(ele)
+            return false
+        }
+        return true
+    })
+
     return (
         <><Nav />
             <Head>
@@ -38,6 +52,8 @@ function Index({ data, slug }) {
                 </div>
                 <span className={styles.secTitle}>Resources</span>
                 <div className={styles.resourcesCon}>
+                    <Resource data={priority[1]} key={'x' + 'resource'} />
+                    <Resource data={priority[0]} key={'y' + 'resource'} />
                     {formatedData.sort((a, b) => a.title.localeCompare(b.title)).map((ele, idx) => {
                         return (
                             <Resource data={ele} key={idx + 'resource'} />
@@ -148,6 +164,7 @@ export async function getServerSideProps(ctx) {
 
         formatedData['hackathons'][ele.hackathons[0].hackathon_name].push(ele)
     })
+
 
     return {
         props: {
