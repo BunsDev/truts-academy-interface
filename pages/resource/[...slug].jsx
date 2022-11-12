@@ -52,8 +52,8 @@ function Index({ data, slug }) {
                 </div>
                 <span className={styles.secTitle}>Resources</span>
                 <div className={styles.resourcesCon}>
-                    <Resource data={priority[1]} key={'x' + 'resource'} />
-                    <Resource data={priority[0]} key={'y' + 'resource'} />
+                    {(priority.length > 1) && <Resource data={priority[1]} key={'x' + 'resource'} />}
+                    {(priority.length > 1) && <Resource data={priority[0]} key={'y' + 'resource'} />}
                     {formatedData.sort((a, b) => a.title.localeCompare(b.title)).map((ele, idx) => {
                         return (
                             <Resource data={ele} key={idx + 'resource'} />
