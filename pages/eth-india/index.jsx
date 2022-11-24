@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from './Home/home.module.scss'
+import styles from '../Home/home.module.scss'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
-import Footer from '../components/Footer'
-import Nav from '../components/Nav'
+import Footer from '../../components/Footer'
+import Nav from '../../components/Nav'
 import axios from 'axios'
 import { invert } from 'lodash'
-import fetchData from '../utils/fetchData'
+import fetchData from '../../utils/fetchData'
 
 
 const CATEGORY_LIST = ['hackathons', 'chains', 'infra', 'defi', 'technology'];
@@ -15,6 +15,10 @@ const CATEGORY_LIST = ['hackathons', 'chains', 'infra', 'defi', 'technology'];
 export default function Home({ data }) {
 
   // console.log(data);
+  let type = 'hackathons'; let resource_type = 'ETH India'
+  let formatedData = data[type][resource_type]
+  let image = formatedData[0].hackathons[0].hackathon_logo;
+  let description = formatedData[0].hackathons[0].description
 
   return (
     <>
@@ -45,44 +49,15 @@ export default function Home({ data }) {
           <link rel="preload" href="./hero_float_2_mobile.png" as='image' />
         </Head>
         <main className={styles.home}>
-          <div className={styles.hero}>
-            <img className={styles.float1_desktop} src="./hero_float_1.png" alt="" />
-            <img className={styles.float2_desktop} src="./hero_float_2.png" alt="" />
-            <img className={styles.float1_mobile} src="./hero_float_1_mobile.png" alt="" />
-            <img className={styles.float2_mobile} src="./hero_float_2_mobile.png" alt="" />
-            <h1 className={styles.title}>
-              Learn web3 with <span className={styles.gradText}>Truts</span>
-            </h1>
-            <h2>Only place for all the Developer Resources in Web3</h2>
-            <span className={styles.heroBtnSec}>
-              <button onClick={() => { openNewTab('https://discord.gg/ZeMkBuKpKe') }} className={styles.primaryBtn}><img style={{ filter: `invert(100%)` }} src="./discord.svg" alt="" />Join Truts</button>
-              <button onClick={() => { document.getElementById('content').scrollIntoView({ behavior: "smooth" }) }} className={styles.secBtn}><img src="./compass.png" alt="" />Explore Resources</button>
-            </span>
-          </div>
-          {/* <ScrollCon /> */}
-          <div className={styles.tabSelector}>
-            {CATEGORY_LIST.map((ele) => {
-              return <p onClick={() => { document.getElementById(ele).scrollIntoView({ behavior: "smooth" }) }} key={ele + 'tb'}>{ele}</p>
-            })}
+          <div className={styles.head} style={{ marginBottom: "100px" }}>
+            <img src={image} alt="" />
+            <div className={styles.info}>
+              <h1>{resource_type}</h1>
+              {/* <h2>About {resource_type}</h2> */}
+              <p>{description}</p>
+            </div>
           </div>
           <div className={styles.content} id='content'>
-            <div className={styles.section} id={'hackathons'}>
-              <h1 className={styles.secTitle}>Hackathons</h1>
-              <div className={styles.resourceCon}>
-                {
-                  Object.keys(data['hackathons']).sort().map((ele, idx) => {
-                    let type = 'hackathons'
-                    let formated_data = data[type][`${ele}`][0].hackathons[0];
-                    let count = data[type][`${ele}`].length;
-                    let slug = `${type}/${ele}`;
-
-                    return (
-                      <HackResource slug={slug} count={count} data={formated_data} key={idx} hackathon_name={data[type][`${ele}`][0].hackathons[0].hackathon_name} />
-                    )
-                  })
-                }
-              </div>
-            </div>
             <div className={styles.section} id={'chains'}>
               <h1 className={styles.secTitle}>Chains</h1>
               <div className={styles.resourceCon}>
@@ -92,9 +67,17 @@ export default function Home({ data }) {
                     let formated_data = data[type][`${ele}`][0].protocols[0];
                     let count = data[type][`${ele}`].length;
 
-                    return (
-                      <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
-                    )
+                    try {
+                      data[type][`${ele}`][0].hackathons[0]
+                      if (data[type][`${ele}`][0].hackathons[0].hackathon_name == 'ETH India') {
+                        return (
+                          <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
+                        )
+                      }
+                      return null
+                    } catch (error) {
+                      return null
+                    }
                   })
                 }
               </div>
@@ -108,14 +91,22 @@ export default function Home({ data }) {
                     let formated_data = data[type][`${ele}`][0].protocols[0];
                     let count = data[type][`${ele}`].length;
 
-                    return (
-                      <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
-                    )
+                    try {
+                      data[type][`${ele}`][0].hackathons[0]
+                      if (data[type][`${ele}`][0].hackathons[0].hackathon_name == 'ETH India') {
+                        return (
+                          <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
+                        )
+                      }
+                      return null
+                    } catch (error) {
+                      return null
+                    }
                   })
                 }
               </div>
             </div>
-            <div className={styles.section} id={'defi'} >
+            {/* <div className={styles.section} id={'defi'} >
               <h1 className={styles.secTitle}>Defi</h1>
               <div className={styles.resourceCon}>
                 {
@@ -123,13 +114,22 @@ export default function Home({ data }) {
                     let type = 'defi'
                     let formated_data = data[type][`${ele}`][0].protocols[0];
                     let count = data[type][`${ele}`].length;
-                    return (
-                      <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
-                    )
+
+                    try {
+                      data[type][`${ele}`][0].hackathons[0]
+                      if (data[type][`${ele}`][0].hackathons[0].hackathon_name == 'ETH India') {
+                        return (
+                          <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
+                        )
+                      }
+                      return null
+                    } catch (error) {
+                      return null
+                    }
                   })
                 }
               </div>
-            </div>
+            </div> */}
             <div className={styles.section} id={"technology"}>
               <h1 className={styles.secTitle}>Technologies</h1>
               <div className={styles.resourceCon}>
@@ -144,9 +144,18 @@ export default function Home({ data }) {
                         formated_data = elx
                       }
                     })
-                    return (
-                      <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
-                    )
+
+                    try {
+                      data[type][`${ele}`][0].hackathons[0]
+                      if (data[type][`${ele}`][0].hackathons[0].hackathon_name == 'ETH India') {
+                        return (
+                          <Resource slug={`${type}/${ele}`} count={count} data={formated_data} key={idx} />
+                        )
+                      }
+                      return null
+                    } catch (error) {
+                      return null
+                    }
                   })
                 }
               </div>
@@ -167,6 +176,9 @@ const HackResource = ({ data, count, slug }) => {
   const [TITLE_LENGTH, setTITLE_LENGTH] = useState(15);
   const [DESC_LENGTH, setDESC_LENGTH] = useState(75);
 
+  const [description, setDescription] = useState(cardData.description);
+  const [title, setTitle] = useState(cardData.hackathon_name.normalize());
+
   useEffect(() => {
     let paraElm = getComputedStyle(para.current);
     let pararHeight = paraElm.getPropertyValue('height');
@@ -175,30 +187,29 @@ const HackResource = ({ data, count, slug }) => {
       setDESC_LENGTH((c) => { return (c - 20) })
     }
 
-  }, [DESC_LENGTH])
+  }, [])
+
+  useEffect(() => {
+    // let description = cardData.description;
+    if (description.length > DESC_LENGTH) {
+      let dc = (description.slice(0, DESC_LENGTH) + '...').normalize();
+      setDescription(dc);
+    }
+    // let title = cardData.hackathon_name.normalize();
+    if (title.length > TITLE_LENGTH) {
+      let ti = title.slice(0, TITLE_LENGTH) + '...';
+      setTitle(ti);
+    }
+  }, [])
+
 
   if (!(data?.hackathon_name.length > 1)) {
     return null
   }
 
-  let description = cardData.description;
-  if (description.length > DESC_LENGTH) {
-    description = (description.slice(0, DESC_LENGTH) + '...').normalize();
-  }
 
-
-  let title = cardData.hackathon_name.normalize();
-  if (title.length > TITLE_LENGTH) {
-    title = title.slice(0, TITLE_LENGTH) + '...';
-  }
-
-  let link = `/resource/${slug}`
-
-  if (title == 'ETH India') {
-    link = '/eth-india'
-  }
   return (
-    <Link href={link}>
+    <Link href={`/resource/${slug}`}>
       <div className={styles.resource}>
         <img src={cardData.hackathon_logo} alt="" />
         <span>
@@ -217,6 +228,10 @@ const Resource = ({ data, count, slug }) => {
   const [TITLE_LENGTH, setTITLE_LENGTH] = useState(15);
   const [DESC_LENGTH, setDESC_LENGTH] = useState(75);
 
+
+  const [description, setDescription] = useState(data.protocol_description);
+  const [title, setTitle] = useState(data.protocol_name.normalize());
+
   useEffect(() => {
     let paraElm = getComputedStyle(para.current);
     let pararHeight = paraElm.getPropertyValue('height');
@@ -225,24 +240,24 @@ const Resource = ({ data, count, slug }) => {
       setDESC_LENGTH((c) => { return (c - 20) })
     }
 
-  }, [DESC_LENGTH])
+  }, [])
+
+
+  useEffect(() => {
+    // let description = cardData.description;
+    if (description.length > DESC_LENGTH) {
+      let dc = (description.slice(0, DESC_LENGTH) + '...').normalize();
+      setDescription(dc);
+    }
+    // let title = cardData.hackathon_name.normalize();
+    if (title.length > TITLE_LENGTH) {
+      let ti = title.slice(0, TITLE_LENGTH) + '...';
+      setTitle(ti);
+    }
+  }, [])
 
   if (!(data?.protocol_name.length > 1)) {
     return null
-  }
-
-  let description = data.protocol_description;
-  if (description.length > DESC_LENGTH) {
-    description = (description.slice(0, DESC_LENGTH) + '...').normalize();
-  }
-
-  if (data.protocol_name == 'HardHat') {
-    console.log(data)
-  }
-
-  let title = data.protocol_name.normalize();
-  if (title.length > TITLE_LENGTH) {
-    title = title.slice(0, TITLE_LENGTH) + '...';
   }
 
   return (
