@@ -130,7 +130,7 @@ export default function Home({ data }) {
                 }
               </div>
             </div> */}
-            <div className={styles.section} id={"technology"}>
+            {/* <div className={styles.section} id={"technology"}>
               <h1 className={styles.secTitle}>Technologies</h1>
               <div className={styles.resourceCon}>
                 {
@@ -159,7 +159,7 @@ export default function Home({ data }) {
                   })
                 }
               </div>
-            </div>
+            </div> */}
           </div>
         </main>
       </div>
