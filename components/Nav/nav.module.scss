@@ -28,7 +28,7 @@ $PHONE_N: 425;
     top: 0;
     left: 0;
     justify-content: center;
-  //  border-bottom: 1px solid rgba(135, 135, 135, 0.25);
+    //  border-bottom: 1px solid rgba(135, 135, 135, 0.25);
     background: #ffffff00;
     //animation: appear 0.5s ease-in-out forwards;
 
@@ -280,6 +280,9 @@ $PHONE_N: 425;
             width: 18px;
             cursor: pointer;
         }
+        .main_logo {
+            width: 150px;
+        }
     }
 
     .list {
@@ -330,7 +333,6 @@ $PHONE_N: 425;
     background: #f7f7f7;
     align-items: center;
     padding: 10px 17px;
-
 
     .searchInput {
         background: #ffffff;
